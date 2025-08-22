@@ -4,9 +4,6 @@
 # Python Cache
 __pycache__/
 
-# Environment Variables (contains API keys)
-.env
-
 # Large model files (>100MB)
 development/hdb_price_model/model.pkl
 

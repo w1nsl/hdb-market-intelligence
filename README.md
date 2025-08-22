@@ -74,21 +74,20 @@ GovTech Project/
    pip install -r requirements.txt
    ```
 
-2. **Environment Setup**
-   ```bash
-   cp .env.example .env
-   # Edit .env and add your API keys:
-   # - OPENAI_API_KEY: Get from https://platform.openai.com/api-keys
-   # - NEON_DATABASE_URL: PostgreSQL connection string (optional)
-   ```
-
-3. **Model Setup**
+2. **Model Setup**
    ```bash
    cd development
    python hdb_predictor.py  # This will train and save the model
    ```
    
    📦 **Model Note**: The trained model file (1.6GB) is excluded from this repository due to GitHub's size limits. The setup command above will generate it locally using the included HDB transaction data.
+
+3. **Ready to Use**
+   The `.env` file is included with shared development credentials for easy setup!
+   
+   ⚠️ **Important**: These are shared development credentials with usage limits. For production use, replace with your own API keys from:
+   - **OpenAI API**: https://platform.openai.com/api-keys
+   - **PostgreSQL**: Your own database connection string
 
 ## Usage
 
@@ -181,3 +180,13 @@ python chatbot.py
 |----------|----------|-------------|
 | `OPENAI_API_KEY` | Yes | OpenAI API key (included) |
 | `NEON_DATABASE_URL` | Yes | PostgreSQL connection string (included) |
+
+## GitHub Push Protection
+
+⚠️ **Note for GitHub Users**: This repository includes API keys for easy setup. When pushing to GitHub, you may encounter GitHub's push protection that blocks commits containing secrets.
+
+**To resolve this:**
+1. **Allow the secrets** by clicking the provided GitHub URL in the error message
+2. **Or remove the API keys** before pushing and use the .env.example approach instead
+
+The included API keys are shared development credentials with usage limits, not production secrets.
