@@ -7,6 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+from hdb_constraints import VALID_TOWNS, VALID_FLAT_TYPES, VALID_STOREY_RANGES, VALID_FLAT_MODELS
 
 class HDBPricePredictor:
     def __init__(self, model_dir: str = None):
@@ -71,16 +72,35 @@ class HDBPricePredictor:
             
             storey_group = self._categorize_storey(storey_range)
             
+            # Validate and normalize inputs according to HDB constraints
+            town_normalized = town.upper()  # Towns are in ALL CAPS
+            flat_type_normalized = flat_type.upper()  # Flat types are in ALL CAPS
+            flat_model_normalized = flat_model  # Flat models keep original case (Mixed Case)
+            storey_group_normalized = storey_group.lower()  # Storey groups are lowercase in model
+            
+            # Validate inputs against constraints
+            if town_normalized not in VALID_TOWNS:
+                raise ValueError(f"Invalid town: {town}. Must be one of: {', '.join(VALID_TOWNS)}")
+            
+            if flat_type_normalized not in VALID_FLAT_TYPES:
+                raise ValueError(f"Invalid flat type: {flat_type}. Must be one of: {', '.join(VALID_FLAT_TYPES)}")
+            
+            if storey_range not in VALID_STOREY_RANGES:
+                raise ValueError(f"Invalid storey range: {storey_range}. Must be one of: {', '.join(VALID_STOREY_RANGES)}")
+            
+            if flat_model_normalized not in VALID_FLAT_MODELS:
+                raise ValueError(f"Invalid flat model: {flat_model}. Must be one of: {', '.join(VALID_FLAT_MODELS)}")
+            
             data = pd.DataFrame({
                 'floor_area_sqm': [float(floor_area_sqm)],
                 'remaining_lease': [float(remaining_lease)],
                 'date_numeric': [(pred_date - pd.Timestamp('2015-01-01')).days],
                 'building_age': [pred_date.year - int(lease_commence_date)],
                 'storey_level': [float(storey_range.split(' TO ')[0])],
-                'town_encoded': [self.encoders['town'].transform([town])[0]],
-                'flat_type_encoded': [self.encoders['flat_type'].transform([flat_type])[0]],
-                'flat_model_encoded': [self.encoders['flat_model'].transform([flat_model])[0]],
-                'storey_group_encoded': [self.encoders['storey_group'].transform([storey_group])[0]]
+                'town_encoded': [self.encoders['town'].transform([town_normalized])[0]],
+                'flat_type_encoded': [self.encoders['flat_type'].transform([flat_type_normalized])[0]],
+                'flat_model_encoded': [self.encoders['flat_model'].transform([flat_model_normalized])[0]],
+                'storey_group_encoded': [self.encoders['storey_group'].transform([storey_group_normalized])[0]]
             })
             
             prediction = self.model.predict(data)[0]

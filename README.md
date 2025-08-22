@@ -8,7 +8,7 @@ AI-powered chatbot system for Singapore's HDB resale market analysis and BTO dev
 - **Data Queries** - Natural language SQL queries on real HDB transaction data
 - **Market Analysis** - Insights and comparisons across Singapore's 26 towns  
 - **Web Interface** - Simple chat interface for easy interaction
-- **API Service** - REST endpoints for integration
+- **REST API** - JSON endpoints for integration
 
 ## High-Level Architecture
 
@@ -32,9 +32,8 @@ The HDB Market Intelligence System is built as a conversational AI that combines
    - Real-time queries on HDB transaction database
    - Supports statistical analysis and trend comparisons
 
-4. **Web Services**
-   - **Flask Web App** (`service/app.py`) - Simple chat interface
-   - **FastAPI Service** (`main.py`) - RESTful API with session management
+4. **Web Service**
+   - **Flask Web App** (`service/app.py`) - Simple chat interface with REST API
 
 ### Conversation Flow
 
@@ -60,8 +59,6 @@ GovTech Project/
 │   ├── app.py              # Flask web application
 │   ├── chatbot_core.py     # Main chatbot engine
 │   └── templates/          # Web interface (HTML/CSS/JS)
-├── main.py                 # FastAPI REST service
-├── models.py               # Pydantic data models
 └── requirements.txt        # Python dependencies
 ```
 
@@ -84,10 +81,6 @@ GovTech Project/
 
 3. **Ready to Use**
    The `.env` file is included with shared development credentials for easy setup!
-   
-   ⚠️ **Important**: These are shared development credentials with usage limits. For production use, replace with your own API keys from:
-   - **OpenAI API**: https://platform.openai.com/api-keys
-   - **PostgreSQL**: Your own database connection string
 
 ## Usage
 
@@ -95,17 +88,11 @@ GovTech Project/
 ```bash
 cd service
 python app.py
-# Visit http://localhost:5001
+# Visit http://localhost:5001 for web interface
+# API available at http://localhost:5001/chat
 ```
 
-### 2. REST API (FastAPI)
-```bash
-python main.py
-# API available at http://localhost:8000
-# Interactive docs at http://localhost:8000/docs
-```
-
-### 3. Console Interface (Development)
+### 2. Console Interface (Development)
 ```bash
 cd development  
 python chatbot.py
@@ -141,19 +128,6 @@ python chatbot.py
   ```
 - `GET /health` - Service health check
 
-### FastAPI Service (`main.py`)
-- `GET /` - API information
-- `POST /chat` - Main chat endpoint with session management
-  ```json
-  {
-    "message": "Price of 4-room flat in Tampines?",
-    "session_id": "optional-session-id"
-  }
-  ```
-- `GET /health` - Health and database status
-- `GET /docs` - Interactive API documentation
-- `GET /sessions` - Active sessions (debug endpoint)
-
 ### Response Format
 ```json
 {
@@ -163,7 +137,7 @@ python chatbot.py
     "confidence": "high|medium|low",
     "assumptions": ["Assumed Model A flat", "..."]
   },
-  "session_id": "uuid"
+  "status": "success"
 }
 ```
 
