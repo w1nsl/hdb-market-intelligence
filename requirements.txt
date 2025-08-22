@@ -1,0 +1,32 @@
+# Data Processing & ML
+pandas>=1.5.0
+numpy>=1.21.0
+scikit-learn>=1.1.0
+matplotlib>=3.5.0
+seaborn>=0.11.0
+xgboost>=1.6.0
+joblib>=1.1.0
+
+# Development & Jupyter
+jupyter>=1.0.0
+
+# LangChain & AI
+huggingface-hub>=0.16.0
+langgraph>=0.1.0
+langchain>=0.2.0
+langchain-openai>=0.1.0
+
+# Environment & Configuration
+python-dotenv>=1.0.0
+
+# Database
+psycopg2-binary>=2.9.0
+
+# Web Frameworks
+flask>=2.3.0
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+
+# Additional Web Dependencies
+gunicorn>=21.0.0

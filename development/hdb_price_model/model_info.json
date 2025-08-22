@@ -1,0 +1,40 @@
+{
+  "model_type": "Random Forest",
+  "feature_columns": [
+    "floor_area_sqm",
+    "remaining_lease",
+    "date_numeric",
+    "building_age",
+    "storey_level",
+    "town_encoded",
+    "flat_type_encoded",
+    "flat_model_encoded",
+    "storey_group_encoded"
+  ],
+  "categorical_features": [
+    "town",
+    "flat_type",
+    "flat_model",
+    "storey_group"
+  ],
+  "numerical_features": [
+    "floor_area_sqm",
+    "remaining_lease",
+    "date_numeric",
+    "building_age",
+    "storey_level"
+  ],
+  "performance": {
+    "test_rmse": 37638.823479493934,
+    "test_mae": 25436.452026320876,
+    "test_r2": 0.9565377696443867
+  },
+  "training_data_shape": [
+    251159,
+    9
+  ],
+  "date_range": {
+    "start": "2015-01-01",
+    "end": "2025-08-01"
+  }
+}
