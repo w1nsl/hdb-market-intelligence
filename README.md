@@ -180,13 +180,3 @@ python chatbot.py
 |----------|----------|-------------|
 | `OPENAI_API_KEY` | Yes | OpenAI API key (included) |
 | `NEON_DATABASE_URL` | Yes | PostgreSQL connection string (included) |
-
-## GitHub Push Protection
-
-⚠️ **Note for GitHub Users**: This repository includes API keys for easy setup. When pushing to GitHub, you may encounter GitHub's push protection that blocks commits containing secrets.
-
-**To resolve this:**
-1. **Allow the secrets** by clicking the provided GitHub URL in the error message
-2. **Or remove the API keys** before pushing and use the .env.example approach instead
-
-The included API keys are shared development credentials with usage limits, not production secrets.
