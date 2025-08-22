@@ -74,18 +74,21 @@ GovTech Project/
    pip install -r requirements.txt
    ```
 
-2. **Model Setup**
+2. **Environment Setup**
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your API keys:
+   # - OPENAI_API_KEY: Get from https://platform.openai.com/api-keys
+   # - NEON_DATABASE_URL: PostgreSQL connection string (optional)
+   ```
+
+3. **Model Setup**
    ```bash
    cd development
    python hdb_predictor.py  # This will train and save the model
    ```
    
-3. **Ready to Use**
-   The `.env` file is already included with shared credentials - no configuration needed!
-   
-   ⚠️ **Important**: These are shared development credentials with usage limits. For production or personal projects outside this demo, replace with your own API keys.
-   
-   📦 **Model Note**: The trained model file (1.6GB) is excluded from this repository. Run the setup command above to generate it locally.
+   📦 **Model Note**: The trained model file (1.6GB) is excluded from this repository due to GitHub's size limits. The setup command above will generate it locally using the included HDB transaction data.
 
 ## Usage
 
